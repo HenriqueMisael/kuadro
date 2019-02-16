@@ -1,18 +1,18 @@
 package com.henriquemisael.kuadro.controller.response;
 
-import com.henriquemisael.kuadro.model.entity.Model;
+import com.henriquemisael.kuadro.model.entity.AbstractModel;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class ModelResponse<T extends Model> {
+public class ModelResponse<T extends AbstractModel> {
 
     private T model;
-    private Map<String, Set<Model>> created;
+    private Map<String, Set<AbstractModel>> created;
 
-    protected ModelResponse(T model, Map<String, Set<Model>> created) {
+    protected ModelResponse(T model, Map<String, Set<AbstractModel>> created) {
         this.model = model;
         this.created = created;
     }
@@ -21,18 +21,18 @@ public class ModelResponse<T extends Model> {
         return model;
     }
 
-    public Map<String, Set<Model>> getCreated() {
+    public Map<String, Set<AbstractModel>> getCreated() {
         return created;
     }
 
-    public static class Builder<T extends Model> {
+    public static class Builder<T extends AbstractModel> {
 
         private final T model;
-        private final Map<String, Set<Model>> created;
+        private final Map<String, Set<AbstractModel>> created;
 
         public Builder(T model) {
             this.model = model;
-            this.created = new HashMap<String, Set<Model>>();
+            this.created = new HashMap<String, Set<AbstractModel>>();
         }
 
         public Builder<T> create(T model) {

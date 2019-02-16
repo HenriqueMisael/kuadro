@@ -33,7 +33,11 @@ public abstract class IntegrationTest {
         return getResponse(mvcResult, ErrorResponse.class);
     }
 
-    protected <T> T getResponse(MvcResult mvcResult, Type type) throws UnsupportedEncodingException {
+    protected <T> T getResponse(MvcResult mvcResult, Class<T> klazz) throws UnsupportedEncodingException {
+        return getResponse(mvcResult, klazz.getGenericSuperclass());
+    }
+
+    protected <T> T getResponse(@NotNull MvcResult mvcResult, Type type) throws UnsupportedEncodingException {
         return gson.fromJson(mvcResult.getResponse().getContentAsString(), type);
     }
 

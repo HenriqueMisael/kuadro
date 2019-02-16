@@ -6,7 +6,7 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 @MappedSuperclass
-public abstract class Model implements Comparable<Model>, Serializable {
+public abstract class AbstractModel implements Comparable<AbstractModel>, Serializable {
 
     @Id
     @GeneratedValue

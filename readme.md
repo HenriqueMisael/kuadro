@@ -1,6 +1,7 @@
 # kuadro
 Open source customizable simple task manager 
 ## Docs
+http://bit.ly/2GJcSaS
 ### Commit
 The commit message **must be** in english. The pattern is the general implementation followed by a explanation of the changes of the specific commit.
 ```
