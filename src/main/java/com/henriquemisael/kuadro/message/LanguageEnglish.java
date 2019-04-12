@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource({ "classpath:/com.henriquemisael.kuadro.message/en-US/exception.properties", "classpath:/com.henriquemisael.kuadro.message/en-US/dictionary.properties" })
-@ConditionalOnProperty(prefix = "kuadro.message", name = "language", havingValue = "en-US")
+@ConditionalOnProperty(prefix = "kuadro.message", name = "language", havingValue = "en-US", matchIfMissing = true)
 public class LanguageEnglish extends AbstractLanguage {
 
     public LanguageEnglish(Environment environment) {

@@ -2,6 +2,9 @@ package com.henriquemisael.kuadro;
 
 import com.google.gson.Gson;
 import com.henriquemisael.kuadro.controller.response.ErrorResponse;
+import com.henriquemisael.kuadro.exception.MultilanguageException;
+import com.henriquemisael.kuadro.message.Language;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,6 +22,9 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,8 +34,17 @@ public abstract class IntegrationTest {
     protected MockMvc mockMvc;
     @Autowired
     protected Gson gson;
+    @Autowired
+    protected TestSupport testSupport;
+    @Autowired
+    private Language language;
 
-    protected ErrorResponse getResponseError(MvcResult mvcResult) throws UnsupportedEncodingException {
+    @Before
+    public void before() {
+        testSupport.deleteAll();
+    }
+
+    protected ErrorResponse getErrorResponse(MvcResult mvcResult) throws UnsupportedEncodingException {
         return getResponse(mvcResult, ErrorResponse.class);
     }
 
@@ -41,6 +56,10 @@ public abstract class IntegrationTest {
         return gson.fromJson(mvcResult.getResponse().getContentAsString(), type);
     }
 
+    protected ResultActions get(String uri, Long id) throws Exception {
+        return get(uri + "/" + id);
+    }
+
     protected ResultActions get(String uri) throws Exception {
         return perform(MockMvcRequestBuilders.get(uri));
     }
@@ -49,8 +68,16 @@ public abstract class IntegrationTest {
         return perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(gson.toJson(requestBody)));
     }
 
+    protected ResultActions put(String uri, Long id, Serializable requestBody) throws Exception {
+        return put(uri + "/" + id, requestBody);
+    }
+
     protected ResultActions put(String uri, Serializable requestBody) throws Exception {
         return perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(gson.toJson(requestBody)));
+    }
+
+    protected ResultActions delete(String uri, Long id) throws Exception {
+        return delete(uri + "/" + id);
     }
 
     protected ResultActions delete(String uri) throws Exception {
@@ -60,5 +87,11 @@ public abstract class IntegrationTest {
     @NotNull
     private ResultActions perform(MockHttpServletRequestBuilder requestBuilder) throws Exception {
         return mockMvc.perform(requestBuilder);
+    }
+
+    protected void assertErrorResponse(ErrorResponse response, MultilanguageException exception) {
+        assertNotNull(response);
+        assertEquals(exception.getClass().getName(), response.getCode());
+        assertEquals(language.get(exception), response.getCode());
     }
 }
