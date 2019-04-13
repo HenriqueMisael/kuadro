@@ -33,7 +33,7 @@ public class FindOneCardTypeServiceTest extends UnitTest {
 
     @Test
     public void found() {
-        CardType cardType = testSupport.getCardType("Demand");
+        CardType cardType = testSupport.getCardType("Demand", initialPhaseName);
         doReturn(Optional.of(cardType)).when(cardTypeRepository).findById(1L);
 
         assertEquals(cardType, subject.find(1L));

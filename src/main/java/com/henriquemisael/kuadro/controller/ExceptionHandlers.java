@@ -2,6 +2,7 @@ package com.henriquemisael.kuadro.controller;
 
 import com.henriquemisael.kuadro.controller.response.ErrorResponse;
 import com.henriquemisael.kuadro.exception.MultilanguageException;
+import com.henriquemisael.kuadro.exception.badrequest.BadRequestException;
 import com.henriquemisael.kuadro.exception.notfound.NotFoundException;
 import com.henriquemisael.kuadro.exception.preconditionfailed.PreconditionFailedException;
 import com.henriquemisael.kuadro.message.Language;
@@ -18,6 +19,13 @@ public class ExceptionHandlers {
 
     public ExceptionHandlers(Language language) {
         this.language = language;
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    public ErrorResponse handleBadRequestException(final BadRequestException ex) {
+        return getErrorResponse(ex);
     }
 
     @ResponseBody

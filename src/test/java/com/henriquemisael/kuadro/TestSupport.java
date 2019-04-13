@@ -6,6 +6,8 @@ import com.henriquemisael.kuadro.model.repository.CardTypeRepository;
 import com.henriquemisael.kuadro.model.repository.PhaseRepository;
 import org.springframework.stereotype.Component;
 
+import static org.apache.logging.log4j.util.Strings.isBlank;
+
 @Component
 public class TestSupport {
 
@@ -30,7 +32,15 @@ public class TestSupport {
         return new Phase(phaseName, null, null, null, null);
     }
 
-    public CardType getCardType(String name) {
-        return new CardType(name, null);
+    public CardType getCardType(String name, String initialPhaseName) {
+
+        Phase initialPhase;
+        if (isBlank(initialPhaseName)) {
+            initialPhase = null;
+        } else {
+            initialPhase = getPhase(initialPhaseName);
+        }
+
+        return new CardType(name, initialPhase);
     }
 }

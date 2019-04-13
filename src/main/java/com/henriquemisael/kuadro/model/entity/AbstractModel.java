@@ -16,6 +16,10 @@ public abstract class AbstractModel implements Comparable<AbstractModel>, Serial
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode();

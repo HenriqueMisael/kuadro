@@ -51,8 +51,8 @@ public class FindAllCardTypeServiceTest extends UnitTest {
 
     @Test
     public void findMany() {
-        CardType firstCardType = testSupport.getCardType("Demand");
-        CardType secondCardType = testSupport.getCardType("Service Order");
+        CardType firstCardType = testSupport.getCardType("Demand", initialPhaseName);
+        CardType secondCardType = testSupport.getCardType("Service Order", initialPhaseName);
         doReturn(asList(firstCardType, secondCardType)).when(cardTypeRepository).findAll();
 
         List<CardType> cardTypes = subject.find();
