@@ -1,5 +1,6 @@
 package com.henriquemisael.kuadro;
 
+import com.henriquemisael.kuadro.model.entity.CardType;
 import com.henriquemisael.kuadro.model.entity.Phase;
 import com.henriquemisael.kuadro.model.repository.CardTypeRepository;
 import com.henriquemisael.kuadro.model.repository.PhaseRepository;
@@ -27,5 +28,9 @@ public class TestSupport {
 
     public Phase getPhase(String phaseName) {
         return new Phase(phaseName, null, null, null, null);
+    }
+
+    public CardType getCardType(String name) {
+        return new CardType(name, null);
     }
 }

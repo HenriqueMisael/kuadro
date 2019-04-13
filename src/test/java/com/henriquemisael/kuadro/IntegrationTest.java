@@ -28,14 +28,12 @@ import static org.junit.Assert.assertNotNull;
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringJUnit4ClassRunner.class)
-public abstract class IntegrationTest {
+public abstract class IntegrationTest extends Test {
 
     @Autowired
     protected MockMvc mockMvc;
     @Autowired
     protected Gson gson;
-    @Autowired
-    protected TestSupport testSupport;
     @Autowired
     private Language language;
 

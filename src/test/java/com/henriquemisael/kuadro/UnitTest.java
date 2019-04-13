@@ -9,10 +9,10 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public abstract class UnitTest {
+public abstract class UnitTest extends Test {
 
     @Before
-    public void before() {
+    public void beforeAll() {
         initMocks(this);
     }
 }
