@@ -48,10 +48,6 @@ public abstract class IntegrationTest {
         return getResponse(mvcResult, ErrorResponse.class);
     }
 
-    protected <T> T getResponse(MvcResult mvcResult, Class<T> klazz) throws UnsupportedEncodingException {
-        return getResponse(mvcResult, klazz.getGenericSuperclass());
-    }
-
     protected <T> T getResponse(@NotNull MvcResult mvcResult, Type type) throws UnsupportedEncodingException {
         return gson.fromJson(mvcResult.getResponse().getContentAsString(), type);
     }
@@ -91,7 +87,7 @@ public abstract class IntegrationTest {
 
     protected void assertErrorResponse(ErrorResponse response, MultilanguageException exception) {
         assertNotNull(response);
-        assertEquals(exception.getClass().getName(), response.getCode());
-        assertEquals(language.get(exception), response.getCode());
+        assertEquals(exception.getClass().getSimpleName(), response.getCode());
+        assertEquals(language.get(exception), response.getMessage());
     }
 }

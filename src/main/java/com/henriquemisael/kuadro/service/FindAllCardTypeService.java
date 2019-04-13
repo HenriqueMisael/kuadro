@@ -5,9 +5,9 @@ import com.henriquemisael.kuadro.model.repository.CardTypeRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FindAllCardsService extends FindAllAbstractService<CardType> {
+public class FindAllCardTypeService extends FindAllAbstractService<CardType> {
 
-    public FindAllCardsService(CardTypeRepository repository) {
+    public FindAllCardTypeService(CardTypeRepository repository) {
         super(repository);
     }
 }

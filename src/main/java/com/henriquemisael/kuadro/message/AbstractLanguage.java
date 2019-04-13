@@ -5,7 +5,7 @@ import org.springframework.core.env.Environment;
 
 import java.util.HashMap;
 
-class AbstractLanguage implements Language {
+abstract class AbstractLanguage implements Language {
 
     private final HashMap<MessageKey, String> messages;
 
