@@ -2,11 +2,13 @@ package com.henriquemisael.kuadro.model.entity;
 
 import com.google.common.collect.ComparisonChain;
 
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
 import static com.google.common.collect.ComparisonChain.start;
 
-public class NamedModel extends AbstractModel {
+@MappedSuperclass
+public abstract class NamedModel extends AbstractModel {
 
     protected String name;
 

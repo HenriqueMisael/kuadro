@@ -1,6 +1,5 @@
 package com.henriquemisael.kuadro.controller;
 
-import com.google.gson.reflect.TypeToken;
 import com.henriquemisael.kuadro.IntegrationTest;
 import com.henriquemisael.kuadro.controller.response.ErrorResponse;
 import com.henriquemisael.kuadro.exception.notfound.CardTypeNotFoundException;
@@ -14,10 +13,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.henriquemisael.kuadro.controller.CardTypeController.PATH;
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,7 +34,7 @@ public class CardTypeControllerTest extends IntegrationTest {
     @Test
     public void getListWithoutCreating() throws Exception {
         ResultActions resultActions = get(PATH).andExpect(status().isOk());
-        List response = getResponse(resultActions.andReturn(), getTypeList());
+        List response = asList(getResponse(resultActions.andReturn(), CardType[].class));
 
         assertNotNull(response);
         assertEquals(0, response.size());
@@ -46,7 +45,7 @@ public class CardTypeControllerTest extends IntegrationTest {
         CardType cardType = getResponse(post(new CardType("Demand", testSupport.insertAndGetPhase("On budget"))).andExpect(status().isCreated()).andReturn());
 
         ResultActions resultActions = get().andExpect(status().isOk());
-        List response = getResponse(resultActions.andReturn(), getTypeList());
+        List<CardType> response = asList(getResponse(resultActions.andReturn(), CardType[].class));
 
         assertNotNull(response);
         assertEquals(1, response.size());
@@ -62,14 +61,6 @@ public class CardTypeControllerTest extends IntegrationTest {
 
         assertNotNull(response);
         assertEquals(cardType, response);
-    }
-
-    @Test
-    public void createForUnexistentPhase() throws Exception {
-        ResultActions resultActions = post(new CardType("Demand", new Phase("On budget", null, null, null, null))).andExpect(status().isNotFound());
-        ErrorResponse response = getErrorResponse(resultActions.andReturn());
-
-        assertErrorResponse(response, new PhaseNamedNotFoundException("On budget"));
     }
 
     @Test
@@ -161,10 +152,5 @@ public class CardTypeControllerTest extends IntegrationTest {
 
     private CardType getResponse(MvcResult mvcResult) throws UnsupportedEncodingException {
         return getResponse(mvcResult, CardType.class);
-    }
-
-    private <T> Type getTypeList() {
-        return new TypeToken<List<T>>() {
-        }.getType();
     }
 }

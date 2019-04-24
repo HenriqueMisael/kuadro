@@ -1,17 +1,27 @@
 package com.henriquemisael.kuadro.service;
 
-import com.henriquemisael.kuadro.model.entity.CardType;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.henriquemisael.kuadro.exception.badrequest.CreateServiceShouldNotBeUsedForUpdate;
+import com.henriquemisael.kuadro.model.entity.AbstractModel;
+import com.henriquemisael.kuadro.service.component.ModelAbstractSaver;
 
-public abstract class CreateModelAbstractService<T> {
+import java.util.function.Function;
 
-    private final JpaRepository<T, Long> repository;
+public abstract class CreateModelAbstractService<T extends AbstractModel> {
 
-    protected CreateModelAbstractService(JpaRepository<T, Long> repository) {
-        this.repository = repository;
+    private final ModelAbstractSaver<T> saver;
+    private Function<Long, ? extends CreateServiceShouldNotBeUsedForUpdate> exceptionSupplier;
+
+    protected CreateModelAbstractService(ModelAbstractSaver<T> saver, Function<Long, ? extends CreateServiceShouldNotBeUsedForUpdate> exceptionSupplier) {
+        this.saver = saver;
+        this.exceptionSupplier = exceptionSupplier;
     }
 
-    public CardType create(CardType cardType) {
+    public T create(T cardType) {
 
+        if (cardType.getId() != null) {
+            throw exceptionSupplier.apply(cardType.getId());
+        }
+
+        return saver.save(cardType);
     }
 }

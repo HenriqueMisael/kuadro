@@ -1,11 +1,13 @@
 package com.henriquemisael.kuadro.model.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
 public class CardType extends NamedModel {
 
+    @ManyToOne
     private Phase initialState;
 
     public CardType() {

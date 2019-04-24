@@ -1,27 +1,32 @@
 package com.henriquemisael.kuadro.service.component;
 
 import com.henriquemisael.kuadro.UnitTest;
+import com.henriquemisael.kuadro.exception.preconditionfailed.CardTypeInitialStateRequiredException;
 import com.henriquemisael.kuadro.exception.preconditionfailed.CardTypeNameRequiredException;
 import com.henriquemisael.kuadro.model.entity.CardType;
 import com.henriquemisael.kuadro.model.repository.CardTypeRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
+
+import java.util.function.Supplier;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class CardTypeSaverTest extends UnitTest {
 
     @Mock
     private CardTypeRepository cardTypeRepository;
+    @Mock
+    private NameNotBlankChecker nameNotBlankChecker;
     private CardTypeSaver subject;
 
     @Before
     public void before() {
-        subject = new CardTypeSaver();
+        subject = new CardTypeSaver(cardTypeRepository, nameNotBlankChecker);
     }
 
     @Test
@@ -34,17 +39,21 @@ public class CardTypeSaverTest extends UnitTest {
         CardType returned = subject.save(cardType);
 
         verify(cardTypeRepository).save(cardType);
+        verify(nameNotBlankChecker).check(eq(cardType), ArgumentMatchers.<Supplier<CardTypeNameRequiredException>>any());
         assertNotNull(returned);
         assertEquals(cardTypeSaved, returned);
     }
 
     @Test
     public void dontSaveWithoutName() {
-        assertThrows(CardTypeNameRequiredException.class, () -> subject.save(testSupport.getCardType(null, "On budget")));
+        CardType cardType = testSupport.getCardType(null, "On budget");
+        doThrow(CardTypeNameRequiredException.class).when(nameNotBlankChecker).check(eq(cardType), ArgumentMatchers.<Supplier<CardTypeNameRequiredException>>any());
+
+        assertThrows(CardTypeNameRequiredException.class, () -> subject.save(cardType));
     }
 
     @Test
     public void dontSaveWithoutInitialPhase() {
-        assertThrows(CardTypeNameRequiredException.class, () -> subject.save(testSupport.getCardType("Demand", null)));
+        assertThrows(CardTypeInitialStateRequiredException.class, () -> subject.save(testSupport.getCardType("Demand", null)));
     }
 }

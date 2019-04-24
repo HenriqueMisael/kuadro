@@ -4,7 +4,7 @@ import com.henriquemisael.kuadro.controller.CardTypeController;
 
 public class CreateCardTypeServiceShouldNotBeUsedForUpdate extends CreateServiceShouldNotBeUsedForUpdate {
 
-    protected CreateCardTypeServiceShouldNotBeUsedForUpdate(Long id) {
+    public CreateCardTypeServiceShouldNotBeUsedForUpdate(Long id) {
         super(CardTypeController.PATH, id);
     }
 }

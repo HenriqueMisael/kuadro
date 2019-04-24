@@ -21,7 +21,7 @@ public class CreateCardTypeServiceTest extends UnitTest {
 
     @Before
     public void before() {
-        subject = new CreateCardTypeService();
+        subject = new CreateCardTypeService(cardTypeSaver);
     }
 
     @Test
