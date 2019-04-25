@@ -86,16 +86,8 @@ public class CardTypeControllerTest extends IntegrationTest {
         CardType response = getResponse(put(PATH, cardType.getId(), new CardType("Demand and Budget", cardType.getInitialState())).andExpect(status().isOk()).andReturn());
 
         assertNotNull(response);
-        assertEquals(cardType, response);
-    }
-
-    @Test
-    public void createAndEditForUnexistentPhase() throws Exception {
-        CardType cardType = getResponse(post(new CardType("Demand", testSupport.insertAndGetPhase("On budget"))).andExpect(status().isCreated()).andReturn());
-
-        ErrorResponse response = getErrorResponse(put(PATH, cardType.getId(), new CardType("Demand", testSupport.getPhase("Deployed"))).andExpect(status().isPreconditionFailed()).andReturn());
-
-        assertErrorResponse(response, new PhaseNamedNotFoundException("On budget"));
+        assertEquals("Demand and Budget", response.getName());
+        assertEquals(cardType.getInitialState(), response.getInitialState());
     }
 
     @Test
