@@ -24,3 +24,28 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+# dependencies
+src/main/resources/webapp/node_modules
+src/main/resources/webapp/\.pnp
+src/main/resources/webapp/\.pnp.js
+
+# testing
+src/main/resources/webapp/coverage
+
+# production
+src/main/resources/webapp/build
+
+# misc
+src/main/resources/webapp/\.DS_Store
+src/main/resources/webapp/\.env.local
+src/main/resources/webapp/\.env.development.local
+src/main/resources/webapp/\.env.test.local
+src/main/resources/webapp/\.env.production.local
+
+src/main/resources/webapp/npm-debug.log*
+src/main/resources/webapp/yarn-debug.log*
+src/main/resources/webapp/yarn-error.log*
+
+src/main/resources/webapp/\.vscode/
+
