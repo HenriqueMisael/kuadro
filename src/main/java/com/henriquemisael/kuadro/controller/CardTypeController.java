@@ -2,10 +2,7 @@ package com.henriquemisael.kuadro.controller;
 
 import com.henriquemisael.kuadro.exception.notfound.CardTypeNotFoundException;
 import com.henriquemisael.kuadro.model.entity.CardType;
-import com.henriquemisael.kuadro.service.CreateCardTypeService;
-import com.henriquemisael.kuadro.service.FindAllCardTypeService;
-import com.henriquemisael.kuadro.service.FindOneCardTypeService;
-import com.henriquemisael.kuadro.service.UpdateCardTypeService;
+import com.henriquemisael.kuadro.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +19,14 @@ public class CardTypeController {
     private final FindOneCardTypeService findOneCardTypeService;
     private final CreateCardTypeService createCardTypeService;
     private final UpdateCardTypeService updateCardTypeService;
+    private final DeleteCardTypeService deleteCardTypeService;
 
-    public CardTypeController(FindAllCardTypeService findAllCardTypeService, FindOneCardTypeService findOneCardTypeService, CreateCardTypeService createCardTypeService, UpdateCardTypeService updateCardTypeService) {
+    public CardTypeController(FindAllCardTypeService findAllCardTypeService, FindOneCardTypeService findOneCardTypeService, CreateCardTypeService createCardTypeService, UpdateCardTypeService updateCardTypeService, DeleteCardTypeService deleteCardTypeService) {
         this.findAllCardTypeService = findAllCardTypeService;
         this.findOneCardTypeService = findOneCardTypeService;
         this.createCardTypeService = createCardTypeService;
         this.updateCardTypeService = updateCardTypeService;
+        this.deleteCardTypeService = deleteCardTypeService;
     }
 
     @GetMapping
@@ -54,5 +53,13 @@ public class CardTypeController {
         cardType = updateCardTypeService.update(id, cardType);
 
         return ResponseEntity.ok(cardType);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable @NotNull Long id) {
+
+        deleteCardTypeService.delete(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
