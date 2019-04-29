@@ -4,4 +4,3 @@ pluginManagement {
     }
 }
 rootProject.name = 'kuadro'
-include 'src/main/resources/webapp'
