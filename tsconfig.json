@@ -20,6 +20,6 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src/main/webapp", "src/index.tsx"
   ]
 }
