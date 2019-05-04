@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(CardTypeController.PATH)
+@CrossOrigin(origins = "http://localhost:3000")
 public class CardTypeController {
 
     public static final String PATH = "/api/card-type";
