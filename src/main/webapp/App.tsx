@@ -1,4 +1,4 @@
-import { Alignment, Button, Navbar } from "@blueprintjs/core";
+import { Alignment, Button, Menu, Navbar, Popover, Position } from "@blueprintjs/core";
 import React from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import './App.css';
@@ -11,10 +11,11 @@ const App: React.FC = () => {
       <div>
         <Navbar>
           <Navbar.Group align={Alignment.LEFT}>
-            <Navbar.Heading>Kuadro</Navbar.Heading>
+            <Navbar.Heading><Link to="/" ><Button className="bp3-minimal" text="Kuadro" /></Link></Navbar.Heading>
             <Navbar.Divider />
-            <Link to="/" ><Button className="bp3-minimal" icon="home" text="Home" /></Link>
-            <Link to="/card-type"><Button className="bp3-minimal" icon="document" text="Card Type" /></Link>
+            <Popover content={<Menu><Link to="/card-type"><Button className="bp3-minimal" icon="document" text="Card Type" /></Link></Menu>} position={Position.BOTTOM}>
+            <Button className="bp3-minimal" icon="menu" text="Workflow" />
+            </Popover>
           </Navbar.Group>
         </Navbar>
 
