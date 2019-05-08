@@ -2,8 +2,8 @@ package com.henriquemisael.kuadro.controller;
 
 import com.henriquemisael.kuadro.IntegrationTest;
 import com.henriquemisael.kuadro.controller.response.ErrorResponse;
-import com.henriquemisael.kuadro.exception.notfound.CardTypeNotFoundException;
-import com.henriquemisael.kuadro.exception.preconditionfailed.CardTypeNameRequiredException;
+import com.henriquemisael.kuadro.exception.notfound.PhaseNotFoundException;
+import com.henriquemisael.kuadro.exception.preconditionfailed.PhaseNameRequiredException;
 import com.henriquemisael.kuadro.model.entity.Phase;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;
@@ -25,7 +25,7 @@ public class PhaseControllerTest extends IntegrationTest {
         ResultActions resultActions = get(PATH, 1L).andExpect(status().isNotFound());
         ErrorResponse response = getErrorResponse(resultActions.andReturn());
 
-        assertErrorResponse(response, new CardTypeNotFoundException(1L));
+        assertErrorResponse(response, new PhaseNotFoundException(1L));
     }
 
     @Test
@@ -96,11 +96,11 @@ public class PhaseControllerTest extends IntegrationTest {
     public void deleteWithoutCreating() throws Exception {
         ErrorResponse response = getErrorResponse(delete(1L).andExpect(status().isNotFound()).andReturn());
 
-        assertErrorResponse(response, new CardTypeNotFoundException(1L));
+        assertErrorResponse(response, new PhaseNotFoundException(1L));
     }
 
     private void assertNameRequired(ErrorResponse response) {
-        assertErrorResponse(response, new CardTypeNameRequiredException());
+        assertErrorResponse(response, new PhaseNameRequiredException());
     }
 
     private ResultActions get() throws Exception {

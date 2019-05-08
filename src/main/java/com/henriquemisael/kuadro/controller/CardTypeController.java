@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 
+@RestController
 @RequestMapping(CardTypeController.PATH)
 public class CardTypeController implements Controller {
 
