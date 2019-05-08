@@ -3,7 +3,6 @@ package com.henriquemisael.kuadro.controller;
 import com.henriquemisael.kuadro.IntegrationTest;
 import com.henriquemisael.kuadro.controller.response.ErrorResponse;
 import com.henriquemisael.kuadro.exception.notfound.CardTypeNotFoundException;
-import com.henriquemisael.kuadro.exception.notfound.PhaseNamedNotFoundException;
 import com.henriquemisael.kuadro.exception.preconditionfailed.CardTypeInitialStateRequiredException;
 import com.henriquemisael.kuadro.exception.preconditionfailed.CardTypeNameRequiredException;
 import com.henriquemisael.kuadro.model.entity.CardType;
@@ -65,7 +64,7 @@ public class CardTypeControllerTest extends IntegrationTest {
 
     @Test
     public void createWithoutName() throws Exception {
-        ResultActions resultActions = post(new CardType(null, new Phase("On budget", null, null, null, null))).andExpect(status().isPreconditionFailed());
+        ResultActions resultActions = post(new CardType(null, new Phase("On budget"))).andExpect(status().isPreconditionFailed());
         ErrorResponse response = getErrorResponse(resultActions.andReturn());
 
         assertNameRequired(response);

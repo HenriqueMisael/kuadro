@@ -10,12 +10,11 @@ import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 
-@RestController
 @RequestMapping(CardTypeController.PATH)
-@CrossOrigin(origins = "http://localhost:3000")
-public class CardTypeController {
+public class CardTypeController implements Controller {
 
-    public static final String PATH = "/api/card-type";
+    public static final String PATH =  "/api/card-type";
+
     private final FindAllCardTypeService findAllCardTypeService;
     private final FindOneCardTypeService findOneCardTypeService;
     private final CreateCardTypeService createCardTypeService;

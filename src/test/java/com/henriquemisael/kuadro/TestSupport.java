@@ -30,7 +30,7 @@ public class TestSupport {
     }
 
     public Phase getPhase(String phaseName) {
-        return new Phase(phaseName, null, null, newHashSet(), newHashSet());
+        return new Phase(phaseName);
     }
 
     public CardType getCardType(String name, String initialPhaseName) {
