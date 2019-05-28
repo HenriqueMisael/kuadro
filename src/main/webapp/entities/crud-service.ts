@@ -1,4 +1,4 @@
-import axios, { AxiosPromise } from "axios";
+import axios, { AxiosPromise, AxiosResponse } from "axios";
 
 const API_URL = `http://localhost:8080/api/`;
 
@@ -9,7 +9,7 @@ export default class CrudService<T> {
         this.crudName = crudName;
     }
 
-    public findAll(): AxiosPromise<T[]> {
+    public findAll(): Promise<AxiosResponse<T[]>> {
         return axios.get(`${API_URL}${this.crudName}`);
     }
 

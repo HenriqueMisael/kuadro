@@ -2,9 +2,9 @@ import { Alignment, Button, Navbar, Popover, Position } from "@blueprintjs/core"
 import React from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import './App.css';
-import CardTypeIndex from "./components/card-type/index";
+import CardTypeIndex from "./components/CardType/index";
 import Home from "./components/home";
-import PhaseIndex from "./components/phase";
+import PhaseIndex from "./components/Phase";
 import SettingsMenu from "./components/settings-menu";
 
 const App: React.FC = () => {

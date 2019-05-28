@@ -3,8 +3,8 @@ import "@blueprintjs/core/lib/css/blueprint.css";
 import { Cell, Column, Table } from "@blueprintjs/table";
 import "@blueprintjs/table/lib/css/table.css";
 import React from "react";
-import cardTypeService from "../../model/card-type/service";
-import CardTypeModel from "../../model/card-type/model";
+import cardTypeService from "../../entities/card-type/service";
+import CardTypeModel from "../../entities/card-type/model";
 
 export default class CardTypeIndex extends React.Component {
 
