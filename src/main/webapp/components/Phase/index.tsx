@@ -1,39 +1,40 @@
-import { Button, H1 } from "@blueprintjs/core";
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/table/lib/css/table.css";
 import React from "react";
 import PhaseModel from "../../entities/phase/model";
-import phaseService from "../../entities/phase/service";
-import IPhaseIndexProps from "../typing/IPhaseIndexProps";
-import IPhaseIndexState from "../typing/IPhaseIndexState";
+import IPhaseIndexProps from "./IPhaseIndexProps";
+import IPhaseIndexState from "./IPhaseIndexState";
+import ListDetail from "../ListDetail";
 
 export default class PhaseIndex extends React.Component<IPhaseIndexProps, IPhaseIndexState> {
 
     state = {
         list: [] as PhaseModel[]
-    }
+    };
 
-    renderLine = (element: PhaseModel) => {
-        return (
-            <div>
-                <Button className="bp3-minimal" text={element.name} />
-            </div>
-        );
+    componentDidMount() {
+        // phaseService.findAll()
+        //     .then(res => {
+        //         if (res.status === 200) {
+        //             this.setState({list: res.data});
+        //         }
+        //     });
+        const list: PhaseModel[] = [
+            {
+                id: 1,
+                name: 'On Budget'
+            },
+            {
+                id: 2,
+                name: 'Development'
+            }
+        ];
+        this.setState({list});
     }
 
     render() {
-        return <div>
-            <H1>Phases</H1>
-            {this.state.list.map(this.renderLine)}
-        </div>
-    }
-
-    componentDidMount() {
-        phaseService.findAll()
-            .then(res => {
-                if (res.status === 200) {
-                    this.setState({ list: res.data });
-                }
-            });
+        return (
+            <ListDetail title='Phase' list={this.state.list}/>
+        )
     }
 }

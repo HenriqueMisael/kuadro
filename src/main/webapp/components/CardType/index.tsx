@@ -1,6 +1,6 @@
-import { H1, Toaster, Position } from "@blueprintjs/core";
+import {H1} from "@blueprintjs/core";
 import "@blueprintjs/core/lib/css/blueprint.css";
-import { Cell, Column, Table } from "@blueprintjs/table";
+import {Cell, Column, Table} from "@blueprintjs/table";
 import "@blueprintjs/table/lib/css/table.css";
 import React from "react";
 import cardTypeService from "../../entities/card-type/service";
@@ -10,7 +10,7 @@ export default class CardTypeIndex extends React.Component {
 
     state = {
         list: [] as CardTypeModel[]
-    }
+    };
 
     render() {
         return <div>

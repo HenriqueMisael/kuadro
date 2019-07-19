@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './main/webapp/App';
 import * as serviceWorker from './main/webapp/serviceWorker';
+import 'normalize.css/normalize.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
