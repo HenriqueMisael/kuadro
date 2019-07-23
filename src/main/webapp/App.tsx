@@ -3,9 +3,9 @@ import React from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import './App.css';
 import CardTypeIndex from "./components/CardType/index";
-import Home from "./components/home";
 import PhaseIndex from "./components/Phase";
-import SettingsMenu from "./components/settings-menu";
+import SettingsMenu from "./components/SettingsMenu";
+import Home from "./components/Home";
 
 const App: React.FC = () => {
   return (
