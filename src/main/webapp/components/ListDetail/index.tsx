@@ -2,20 +2,18 @@ import IListDetailProps from "./IListDetailProps";
 import React from "react";
 import {Button, ButtonGroup} from "@blueprintjs/core";
 import IListDetailState from "./IListDetailState";
+import SelectableList from "../SelectableList";
 
-class ListDetail extends React.Component<IListDetailProps, IListDetailState> {
+class ListDetail<MODEL> extends React.Component<IListDetailProps<MODEL>, IListDetailState<MODEL>> {
 
     state = {
-        selected: {}
+        selected: this.props.list[0]
     };
 
     render() {
         return (
             <div>
-                <ButtonGroup vertical={true} minimal={true}>
-                    {this.props.list.map(item => <Button active={item === this.state.selected}
-                                                         onClick={() => this.setState({selected: item})}>{item.name}</Button>)}
-                </ButtonGroup>
+                <SelectableList list={this.props.list} selected={[this.state.selected]}/>
             </div>
         )
     }

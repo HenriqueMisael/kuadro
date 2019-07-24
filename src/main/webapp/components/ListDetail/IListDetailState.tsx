@@ -1,3 +1,3 @@
-export default interface IListDetailState {
-    selected: any;
+export default interface IListDetailState<MODEL> {
+    selected?: MODEL;
 }
